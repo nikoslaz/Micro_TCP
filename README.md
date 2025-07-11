@@ -39,3 +39,26 @@ int microtcp_shutdown(microtcp_sock_t *socket, int how);
 ssize_t microtcp_send(microtcp_sock_t *socket, const void *buffer, size_t length, int flags);
 ssize_t microtcp_recv(microtcp_sock_t *socket, void *buffer, size_t length, int flags);
 ```
+## Implementation Notes
+
+### State Management:
+- Tracks connection state (UNKNOWN, BOUND, LISTEN, ESTABLISHED, etc.)  
+- Handles state transitions during connection setup/teardown  
+
+### Error Handling:
+- Comprehensive error checking  
+- Detailed error messages via `perror()`  
+- State reset on critical errors  
+
+### Performance Tracking:
+- Counts packets/bytes sent/received/lost  
+- Measures transmission time  
+
+---
+
+## Limitations
+
+- Currently uses UDP as the underlying transport  
+- Limited to single-client connections in this implementation  
+- Basic congestion control without advanced algorithms like TCP Cubic  
+
